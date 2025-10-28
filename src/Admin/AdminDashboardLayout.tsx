@@ -1,8 +1,9 @@
-import React from 'react'
+
 import TopSection from './TopSection'
 import CardHeader from './CardHeader'
 import RevenueChart from '../components/RenevueChart'
 import Customer from './Customer'
+import VoicebotDashboard from './CallVolume'
 
 const AdminDashboardLayout = () => {
   return (
@@ -19,6 +20,9 @@ const AdminDashboardLayout = () => {
         <div className='flex items-center gap-4 w-full'>
             <RevenueChart/>
             <Customer/>
+        </div>
+        <div className='w-full'>
+            <VoicebotDashboard/>
         </div>
     </div>
   )

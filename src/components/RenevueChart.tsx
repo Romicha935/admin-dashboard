@@ -1,25 +1,32 @@
-import React from 'react';
-import { Bar, BarChart, CartesianGrid, ResponsiveContainer, XAxis, YAxis } from 'recharts';
-//import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts';
+import React from "react";
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  ResponsiveContainer,
+  XAxis,
+  YAxis,
+} from "recharts";
 
 const RevenueChart = () => {
   const revenueData = [
-    { month: '01', revenue: 88 },
-    { month: '03', revenue: 100 },
-    { month: '06', revenue: 96 },
-    { month: '09', revenue: 80 },
-    { month: '12', revenue: 76 },
-    { month: '15', revenue: 100 },
-    { month: '18', revenue: 88 },
-    { month: '21', revenue: 84 },
-    { month: '24', revenue: 80 },
-    { month: '27', revenue: 76 },
-    { month: '30', revenue: 72 }
+    { month: "01", revenue: 88 },
+    { month: "03", revenue: 100 },
+    { month: "06", revenue: 96 },
+    { month: "09", revenue: 80 },
+    { month: "12", revenue: 76 },
+    { month: "15", revenue: 100 },
+    { month: "18", revenue: 88 },
+    { month: "21", revenue: 84 },
+    { month: "24", revenue: 80 },
+    { month: "27", revenue: 76 },
+    { month: "30", revenue: 72 },
   ];
 
-  const CustomBar = (props) => {
+  // 🎨 Custom Bar Design
+  const CustomBar = (props: any) => {
     const { x, y, width, height } = props;
-    
+
     return (
       <g>
         <defs>
@@ -35,51 +42,65 @@ const RevenueChart = () => {
           width={width}
           height={height}
           fill={`url(#barGradient-${x})`}
+          rx={5}
         />
       </g>
     );
   };
 
   return (
-    <div className="w-full h-full bg-white p-6">
-      <h3 className="text-xl font-semibold text-[#171C35] mb-6">Total Revenue</h3>
-      
-      <div className="flex items-baseline gap-2 mb-4">
-        <span className="text-xl font-semibold text-gray-800">25k</span>
-        <span className="text-xs text-gray-400">Total Revenue in last month</span>
+    <div className="w-full bg-white p-6 rounded-2xl flex flex-col md:flex-row items-center md:items-stretch justify-between gap-6">
+      {/* Chart Section */}
+      <div className="flex-1">
+        <h3 className="text-xl font-semibold text-[#171C35] mb-4">
+          Total Revenue
+        </h3>
+
+        <div className="flex gap-3">
+            {/* Side Info Section */}
+{/* Side Info Section */}
+<div className="flex flex-col items-start justify-center text-left w-[200px]">
+  <span className="text-3xl font-semibold text-[#171C35] mb-1">25k</span>
+  <span className="text-sm font-medium text-[#111A2D] leading-tight">
+    Total Revenue in last month
+  </span>
+</div>
+
+
+            <ResponsiveContainer width="100%" height={280}>
+          <BarChart
+            data={revenueData}
+            margin={{ top: 10, right: 10, left: -15, bottom: 0 }}
+          >
+            <CartesianGrid strokeDasharray="0" vertical={false} stroke="#f3f4f6" />
+            <XAxis
+              dataKey="month"
+              axisLine={false}
+              tickLine={false}
+              tick={{ fill: "#9ca3af", fontSize: 11 }}
+              dy={8}
+            />
+            <YAxis
+              axisLine={false}
+              tickLine={false}
+              tick={{ fill: "#111A2D", fontSize: 12, fontWeight: 500 }} // ✅ font medium + color added
+              ticks={[20, 40, 60, 80, 100]}
+              tickFormatter={(value) => `${value}%`}
+              domain={[0, 100]}
+              dx={-5}
+            />
+            <Bar
+              dataKey="revenue"
+              shape={<CustomBar />}
+              fill="#6366f1"
+              maxBarSize={35}
+            />
+          </BarChart>
+        </ResponsiveContainer>
+        </div>
       </div>
+
       
-      <ResponsiveContainer width="100%" height={280}>
-        <BarChart data={revenueData} margin={{ top: 10, right: 10, left: -15, bottom: 0 }}>
-          <CartesianGrid 
-            strokeDasharray="0" 
-            vertical={false} 
-            stroke="#f3f4f6"
-          />
-          <XAxis 
-            dataKey="month" 
-            axisLine={false} 
-            tickLine={false}
-            tick={{ fill: '#9ca3af', fontSize: 11 }}
-            dy={8}
-          />
-          <YAxis 
-            axisLine={false} 
-            tickLine={false}
-            tick={{ fill: '#9ca3af', fontSize: 11 }}
-            ticks={[20, 40, 60, 80, 100]}
-            tickFormatter={(value) => `${value}%`}
-            domain={[0, 100]}
-            dx={-5}
-          />
-          <Bar 
-            dataKey="revenue" 
-            shape={<CustomBar />}
-            fill="#6366f1"
-            maxBarSize={35}
-          />
-        </BarChart>
-      </ResponsiveContainer>
     </div>
   );
 };
