@@ -1,5 +1,7 @@
 
 import AdminDashboardLayout from './Admin/AdminDashboardLayout'
+import StatsSection from './Admin/CustomerManagement/CustomerCards'
+import DoctorDatabaseTable from './Admin/CustomerManagement/DoctorDatabase'
 import './App.css'
 // import Dashboard from './components/AdminDashboard'
 // import DashboardCards from './components/Card'
@@ -16,6 +18,10 @@ function App() {
      {/* <Dashboard/> */}
      {/* <DashboardCards/> */}
      <AdminDashboardLayout/>
+     <div>
+      <StatsSection/>
+      <DoctorDatabaseTable/>
+     </div>
  
     </>
   )
